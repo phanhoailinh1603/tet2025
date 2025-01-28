@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đếm Ngược Tết 2025</title>
+    <script>
+        // Hàm cập nhật đếm ngược
+        function updateCountdown() {
+            const targetDate = new Date('2025-01-29T00:00:00'); // Đặt thời gian đếm ngược
+            const now = new Date();
+            const diff = targetDate - now;
+
+            if (diff <= 0) {
+                window.location.href = "https://example.com"; // Thay bằng URL mục tiêu
+                return;
+            }
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+            document.getElementById('countdown').textContent = 
+                `${days} ngày ${hours} giờ ${minutes} phút ${seconds} giây`;
+        }
+
+        window.onload = function() {
+            // Đặt cập nhật đếm ngược mỗi giây
+            setInterval(updateCountdown, 1000);
+        };
+
+        // Hàm phát nhạc khi nhấn nút
+        function playMusic() {
+            document.getElementById('audio').play();
+            document.getElementById('playButton').style.display = 'none'; // Ẩn nút khi nhạc bắt đầu
+            document.getElementById('countdownContainer').style.display = 'block'; // Hiển thị đếm ngược
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #ffd700;
+            background-image: url('tet.jpg'); /* Đặt hình nền là tet.jpg */
+            background-size: cover;
+            background-position: center;
+        }
+        .countdown-container {
+            text-align: center;
+            padding: 30px;
+            border: 3px solid #ff4500;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            display: none; /* Ban đầu ẩn phần đếm ngược */
+        }
+        #countdown {
+            font-size: 2.5rem;
+            color: #e63946;
+            margin-top: 15px;
+        }
+        h1 {
+            font-size: 2rem;
+            color: #d62828;
+        }
+        #playButton {
+            background-color: #e63946;
+            color: white;
+            padding: 20px 40px; /* Làm cho nút to hơn bằng cách tăng padding */
+            font-size: 2rem; /* Tăng kích thước font chữ */
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        #playButton:hover {
+            background-color: #d62828;
+        }
+    </style>
+</head>
+<body>
+    <!-- Nút để người dùng nhấn để phát nhạc -->
+    <button id="playButton" onclick="playMusic()">Bắt đầu</button>
+    
+    <!-- Phần âm thanh sẽ được phát khi người dùng nhấn nút -->
+    <audio id="audio" loop>
+        <source src="nhac.mp3" type="audio/mpeg"> <!-- Đảm bảo đường dẫn đúng đến file nhạc mp3 -->
+        Trình duyệt của bạn không hỗ trợ phát nhạc.
+    </audio>
+
+    <!-- Phần đếm ngược sẽ hiển thị sau khi nhấn nút -->
+    <div id="countdownContainer" class="countdown-container">
+        <h1>Chúc Mừng Năm Mới 2025!</h1>
+        <p>Đếm ngược đến giao thừa: <span id="countdown"></span></p>
+    </div>
+</body>
+</html>
